@@ -551,3 +551,77 @@ section{ padding: 72px 0; }
 ========================================================= */
 .reveal{ opacity: 0; transform: translateY(16px); transition: opacity 640ms var(--ease), transform 640ms var(--ease); }
 .reveal.is-visible{ opacity: 1; transform: translateY(0); }
+
+/* ===== Design refinements — v1.1 polish, append-only ===== */  
+  
+/* Eyebrow: replace tracked all-caps with a line-marker + sentence case */  
+.eyebrow {  
+  text-transform: none;  
+  letter-spacing: 0;  
+  font-weight: 600;  
+  font-size: 0.95rem;  
+  color: var(--violet);  
+  position: relative;  
+  padding-left: 28px;  
+}  
+.eyebrow::before {  
+  content: "";  
+  position: absolute;  
+  left: 0;  
+  top: 50%;  
+  width: 20px;  
+  height: 2px;  
+  background: var(--violet);  
+  transform: translateY(-50%);  
+}  
+  
+/* Hero flow-line: one deliberate draw-in on load, not a scattered effect */  
+.flow-line {  
+  stroke-dasharray: 900;  
+  stroke-dashoffset: 900;  
+  animation: draw-flow 1.6s ease-out 0.3s forwards;  
+}  
+@keyframes draw-flow { to { stroke-dashoffset: 0; } }  
+@media (prefers-reduced-motion: reduce) {  
+  .flow-line { animation: none; stroke-dashoffset: 0; }  
+}  
+  
+/* Buttons: directional lift instead of generic scale/shadow-pop */  
+.btn-primary, .btn-primary-inverse {  
+  transition: transform 0.25s ease, box-shadow 0.25s ease;  
+}  
+.btn-primary:hover, .btn-primary-inverse:hover {  
+  transform: translateY(-2px);  
+  box-shadow: 0 10px 24px rgba(27,27,30,0.18);  
+}  
+.btn-ghost:hover, .btn-ghost-inverse:hover {  
+  border-color: var(--violet);  
+  color: var(--violet);  
+}  
+  
+/* Growth System: make the "one system" concept visually literal */  
+.stage-list { position: relative; padding-left: 28px; }  
+.stage-list::before {  
+  content: "";  
+  position: absolute;  
+  left: 5px; top: 8px; bottom: 8px;  
+  width: 2px;  
+  background: linear-gradient(to bottom, var(--lavender), var(--violet));  
+}  
+.stage-marker { position: relative; z-index: 1; }  
+  
+/* Selected Work cards: quiet lift, brand-colored top edge instead of shadow-pop */  
+.work-card {  
+  transition: transform 0.3s ease, border-color 0.3s ease;  
+  border-top: 2px solid transparent;  
+}  
+.work-card:hover {  
+  transform: translateY(-4px);  
+  border-top-color: var(--lavender);  
+}  
+  
+/* Who We Help: break uniform-box monotony with quiet tint alternation */  
+.who-card { transition: background 0.25s ease, transform 0.25s ease; }  
+.who-card:hover { transform: translateY(-2px); }  
+.who-card:nth-child(odd)  { background: rgba(185,169,217,0.12); }  
+.who-card:nth-child(even) { background: rgba(74,53,102,0.06); }  
